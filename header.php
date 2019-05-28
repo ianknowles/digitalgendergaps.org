@@ -12,9 +12,10 @@
 	<meta property="og:site_name" content="<?php echo get_bloginfo('name', 'display'); ?>" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="<?php echo get_permalink()?>" />
+	<!-- //TODO include a default in the theme and an option for upload -->
 	<meta property="og:image" content="https://www.digitalgendergaps.org/wp-content/uploads/2018/10/report_screenshot.png" />
 	<link rel="icon" type="image/gif" href="<?php echo get_theme_file_uri('/assets/images/Icons-mini-icon_world.gif'); ?>">
-	<!-- TODO deprecated -->
+	<!-- //TODO deprecated -->
 	<title><?php wp_title(' | ', true, 'right'); ?><?php echo get_bloginfo('name', 'display'); ?></title>
 
 	<!-- Bootstrap core CSS -->
