@@ -26,12 +26,11 @@
 	<?php wp_head(); ?>
 </head>
 <body>
-<!--<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">-->
-<nav id="nav-header" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow align-items-end"><!-- flex-md-nowrap -->
-	<!-- col-sm-3 col-md-2--><a class="navbar-brand col-12 col-md-6 mr-0 mr-md-3" href="<?php echo get_bloginfo('url', 'display'); ?>">
-	<h1 class="my-0 d-none d-md-block"><?php echo get_bloginfo('name', 'display'); ?></h1>
-	<h1 class="my-0 h2 d-block d-md-none"><?php echo get_bloginfo('name', 'display'); ?></h1>
-	<p class="text-truncate my-0"><?php bloginfo('description'); ?></p>
+<nav id="nav-header" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow align-items-end">
+	<a class="navbar-brand col-12 col-md-6 mr-0 mr-md-3" href="<?php echo get_bloginfo('url', 'display'); ?>">
+		<h1 class="my-0 d-none d-md-block"><?php echo get_bloginfo('name', 'display'); ?></h1>
+		<h1 class="my-0 h2 d-block d-md-none"><?php echo get_bloginfo('name', 'display'); ?></h1>
+		<p class="text-truncate my-0"><?php bloginfo('description'); ?></p>
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
