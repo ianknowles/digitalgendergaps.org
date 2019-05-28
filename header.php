@@ -13,7 +13,7 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="<?php echo get_permalink()?>" />
 	<meta property="og:image" content="https://www.digitalgendergaps.org/wp-content/uploads/2018/10/report_screenshot.png" />
-	<link rel="icon" type="image/gif" href="<?php echo get_stylesheet_directory_uri(); ?>/Icons-mini-icon_world.gif">
+	<link rel="icon" type="image/gif" href="<?php echo get_theme_file_uri('/assets/images/Icons-mini-icon_world.gif'); ?>">
 	<!-- TODO deprecated -->
 	<title><?php wp_title(' | ', true, 'right'); ?><?php echo get_bloginfo('name', 'display'); ?></title>
 
@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 	<!-- Custom styles for this template -->
-	<link href="<?php echo plugins_url('digitalgendergaps/dashboard.css', ''); ?>" rel="stylesheet">
+	<link href="<?php echo get_theme_file_uri('/assets/css/dashboard.css'); ?>" rel="stylesheet">
 	<link href="<?php echo get_stylesheet_uri(); ?>" rel="stylesheet">
 	<?php wp_head(); ?>
 </head>
