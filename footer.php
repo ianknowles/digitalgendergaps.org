@@ -7,7 +7,7 @@
 		<div class="align-self-center">With support from</div>
 		<div class="align-self-center"><a href="https://www.data2x.org/" target="_blank"><img class="m-2 p-2" alt="data2x project logo" src="<?php echo get_theme_file_uri('/assets/images/data2x-logo.png'); ?>"></img></a></div>
 	</div>
-	<p class="m-2">&copy; 2018–2019, Digital Gender Gaps Project</p>
+	<p class="m-2">&copy; 2018–<?=date("Y")?>, Digital Gender Gaps Project</p>
 </footer>
 <!-- Bootstrap core JavaScript
 ================================================== -->
