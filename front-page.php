@@ -16,9 +16,6 @@
 						coverage, comparability, and are slow to be updated.</p>
 					<p>We show how big data can help close this gender data gap and measure progress towards this
 						important development goal in real-time.</p>
-					<!--
-					<p>This is a first prototype of the Digital Gender Gaps project. We will be highlighting international differences in women's access to technology. Much of the site is still under construction. </p>
-					<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>-->
 				</div>
 			</div>
 			<div class="container">
