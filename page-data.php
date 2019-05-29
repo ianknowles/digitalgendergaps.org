@@ -40,11 +40,7 @@
 					</button>-->
 				</div>
 			</div>
-			<!--<div class="spinner-border spinner-border-sm"></div>-->
 
-			<!--<div class="my-4 w-100" id="myChart1" width="900" height="475"></div>
-			<div id="myChart2" style="width:700px; height:475px"></div>-->
-			<!--<div id="myChart" style="width:61vh; height:90vh" style="width:100vmin; height:68vmin"></div>-->
 			<!-- TODO min height set to force the scrollbar, set the empty sizes more realistically -->
 			<figure class="position-relative" style="min-height: 39vw">
 				<div id="shade" class="background-color-sea position-absolute w-100 h-100 d-flex justify-content-center align-items-center" style="z-index: 900;"><span class="spinner-border"></span></div>
