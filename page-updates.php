@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div class="container-fluid">
+<div class="container-fluid position-absolute top-0">
 	<div class="row">
 		<?php get_sidebar(); ?>
 		<main role="main" class="col-12 col-md-10 ml-sm-auto px-4">

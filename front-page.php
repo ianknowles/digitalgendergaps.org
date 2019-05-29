@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div class="container-fluid position-absolute top-0" style="top:0">
+<div class="container-fluid position-absolute top-0">
 	<div class="row">
 		<main role="main" class="col-12 ml-sm-auto px-0">
 
