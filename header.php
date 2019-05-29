@@ -46,7 +46,7 @@
 				<a class="nav-link pl-1" href="<?php echo get_permalink(get_page_by_path('data', OBJECT, 'page')); ?>"><span data-feather="database"></span><span class="ml-1">Data</span><span class="sr-only"><?php if (get_post_field( 'post_name', get_post() ) == 'data'): echo '(current)'; endif; ?></span></a>
 			</li>
 			<li class="nav-item dropdown<?php $page = get_post_field( 'post_name', get_post() ); if (($page == 'project') || ($page == 'indicators') || ($page == 'team') || ($page == 'privacy-policy')): echo ' active'; endif; ?>">
-				<a class="nav-link  pl-1 dropdown-toggle" href="." id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span data-feather="info"></span><span class="ml-1">About</span></a>
+				<a class="nav-link pl-1 dropdown-toggle" href="." id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span data-feather="info"></span><span class="ml-1">About</span></a>
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
 					<a class="dropdown-item <?php if (get_post_field( 'post_name', get_post() ) == 'project'): echo 'active'; endif; ?>" href="<?php echo get_permalink(get_page_by_path('project', OBJECT, 'page')); ?>"><span data-feather="book-open"></span> Project</a>
 					<a class="dropdown-item <?php if (get_post_field( 'post_name', get_post() ) == 'indicators'): echo 'active'; endif; ?>" href="<?php echo get_permalink(get_page_by_path('indicators', OBJECT, 'page')); ?>"><span data-feather="bar-chart-2"></span> Indicators</a>
