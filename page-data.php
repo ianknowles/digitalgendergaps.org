@@ -47,10 +47,10 @@
 			<!--<div id="myChart" style="width:61vh; height:90vh" style="width:100vmin; height:68vmin"></div>-->
 			<!-- TODO min height set to force the scrollbar, set the empty sizes more realistically -->
 			<figure class="position-relative" style="min-height: 39vw">
-				<div id="shade" class="position-absolute w-100 h-100 d-flex justify-content-center align-items-center" style="z-index: 900;background:LightCyan"><span class="spinner-border"></span></div>
+				<div id="shade" class="background-color-sea position-absolute w-100 h-100 d-flex justify-content-center align-items-center" style="z-index: 900;"><span class="spinner-border"></span></div>
 				<div class="row" >
 					<div id="map" class="col-12 col-lg-11 d-lg-flex flex-lg-column">
-						<div id="myChart" style="background:LightCyan"></div>
+						<div id="myChart" class="background-color-sea"></div>
 					</div>
 					<div id="map-v-legend" class="col-lg-1 d-none d-lg-flex flex-lg-column"></div>
 				</div>
