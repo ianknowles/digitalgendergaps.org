@@ -65,6 +65,6 @@
 </main>
 </div>
 	<div class="row">
-		<div class="col-12 ml-sm-auto px-0"><?php get_footer(); ?><div>
+		<div class="col-12 ml-sm-auto px-0"><?php get_footer(); ?></div>
 	</div>
 </div>
