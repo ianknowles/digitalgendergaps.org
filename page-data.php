@@ -43,7 +43,7 @@
 
 			<!-- TODO min height set to force the scrollbar, set the empty sizes more realistically -->
 			<figure class="position-relative" style="min-height: 39vw">
-				<div id="shade" class="background-color-sea position-absolute w-100 h-100 d-flex justify-content-center align-items-center" style="z-index: 900;"><span class="spinner-border"></span></div>
+				<div id="shade" class="background-color-sea position-absolute w-100 h-100 d-flex justify-content-center align-items-center"><span class="spinner-border"></span></div>
 				<div class="row" >
 					<div id="map" class="col-12 col-lg-11 d-lg-flex flex-lg-column">
 						<div id="myChart" class="background-color-sea"></div>
@@ -73,7 +73,7 @@
            	</div>
 			<!-- TODO min height set to force the scrollbar -->
 			<div class="table-responsive min-vh-100">
-				<div id="tableshade" class="position-absolute w-100 h-100 d-flex justify-content-center" style="z-index: 900;"><span class="spinner-border"></span></div>
+				<div id="tableshade" class="position-absolute w-100 h-100 d-flex justify-content-center"><span class="spinner-border"></span></div>
 				<table class="table table-striped table-sm" id="modeltable">
 				</table>
 			</div>

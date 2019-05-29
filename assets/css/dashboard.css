@@ -265,3 +265,7 @@ input[type="color" i] {
 .background-color-sea {
 	background:LightCyan
 }
+
+div#shade, div#tableshade {
+	z-index: 900;
+}
