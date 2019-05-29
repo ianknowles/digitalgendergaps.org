@@ -3,7 +3,7 @@
 	<div class="row">
 		<main role="main" class="col-12 ml-sm-auto px-0">
 
-	<div class="jumbotron" style="background-color:#b8daff;">
+	<div class="jumbotron front-page-jumbo">
 		<div class="container">
 			<h1 class="display-4 d-none d-md-block">Using big data to measure global gender gaps in internet and mobile access</h1>
 			<h1 class="h4 d-block d-md-none">Using big data to measure global gender gaps in internet and mobile access</h1>
