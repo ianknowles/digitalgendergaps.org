@@ -60,14 +60,10 @@
 				<h2 class="h3">Details</h2>
 				<div class="btn-toolbar mb-2 mb-md-0">
 					<div class="input-group my-2 my-lg-0">
-					<div class="input-group-prepend">
-                		<div class="input-group-text" id=""><span data-feather='filter'></span></div>
-                	</div>
-					<!--<form class="form-inline my-2 my-lg-0">-->
-
+						<div class="input-group-prepend">
+                			<div class="input-group-text" id=""><span data-feather='filter'></span></div>
+                		</div>
             			<input id='search' class="form-control mr-sm-2" type="text" placeholder="Filter by Country" aria-label="Filter">
-            			<!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filter</button>-->
-            		<!--</form>-->
             		</div>
            		</div>
            	</div>
