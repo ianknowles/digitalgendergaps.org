@@ -1,4 +1,4 @@
-<footer class="bg-light">
+<footer class="bg-light w-100 h-100">
 	<hr>
 	<div class="d-flex flex-column flex-lg-row flex-wrap justify-content-center align-content-center">
 		<div class="align-self-center">A collaboration between</div>
