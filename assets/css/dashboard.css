@@ -269,3 +269,7 @@ input[type="color" i] {
 div#shade, div#tableshade {
 	z-index: 900;
 }
+
+figure#map-contain {
+	min-height: 39vw;
+}

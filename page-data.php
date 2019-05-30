@@ -42,7 +42,7 @@
 			</div>
 
 			<!-- //TODO min height set to force the scrollbar, set the empty sizes more realistically -->
-			<figure class="position-relative" style="min-height: 39vw">
+			<figure id="map-contain" class="position-relative">
 				<div id="shade" class="background-color-sea position-absolute w-100 h-100 d-flex justify-content-center align-items-center"><span class="spinner-border"></span></div>
 				<div class="row" >
 					<div id="map" class="col-12 col-lg-11 d-lg-flex flex-lg-column">
