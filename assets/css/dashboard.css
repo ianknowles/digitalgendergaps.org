@@ -270,6 +270,7 @@ div#shade, div#tableshade {
 	z-index: 900;
 }
 
+/*TODO min height set to force the scrollbar, set the empty sizes more realistically*/
 figure#map-contain {
 	min-height: 39vw;
 }
