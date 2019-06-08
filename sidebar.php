@@ -1,5 +1,5 @@
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-	<div class="sidebar-sticky">
+	<div class="sidebar-sticky mt-2">
 		<ul class="nav flex-column">
 			<li class="nav-item">
 				<a class="nav-link <?php if (get_post_field( 'post_name', get_post() ) == 'data'): echo 'active'; endif; ?>" href="<?php echo get_permalink(get_page_by_path('data', OBJECT, 'page')); ?>">
