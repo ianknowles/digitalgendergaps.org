@@ -1,5 +1,5 @@
 <footer class="bg-light w-100 h-100">
-	<hr>
+	<hr class="mt-0">
 	<div class="d-flex flex-column flex-lg-row flex-wrap justify-content-center align-content-center">
 		<div class="align-self-center">A collaboration between</div>
 		<div class="align-self-center">
