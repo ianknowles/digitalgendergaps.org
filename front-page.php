@@ -1,4 +1,7 @@
-<?php get_header(); ?>
+<?php
+	get_header();
+	get_template_part('template-parts/navigation/navigation', 'top');
+?>
 <div class="container-fluid position-absolute top-0 h-100">
 	<div class="row h-100" >
 		<main role="main" class="h-100 col-12 ml-sm-auto px-0">
