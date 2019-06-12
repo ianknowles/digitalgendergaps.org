@@ -24,6 +24,8 @@
 	<!-- Custom styles for this template -->
 	<link href="<?php echo get_theme_file_uri('/assets/css/dashboard.css'); ?>" rel="stylesheet">
 	<link href="<?php echo get_stylesheet_uri(); ?>" rel="stylesheet">
+
+	<link rel="manifest" href="<?php echo get_theme_file_uri('manifest.json'); ?>">
 	<?php wp_head(); ?>
 </head>
 <body>

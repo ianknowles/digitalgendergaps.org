@@ -8,7 +8,7 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	<div class="collapse navbar-collapse align-items-end" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item<?php if ( is_front_page() ) : echo ' active'; endif; ?>">
 				<a class="nav-link pl-1" href="<?php echo get_bloginfo('wpurl', 'display'); ?>"><span data-feather="home"></span><span class="ml-1">Home</span></a>
@@ -27,5 +27,6 @@
 				</div>
 			</li>
 		</ul>
+		<span id="offlineIndicator" class="navbar-text px-3 display-4 d-none">Offline</span>
 	</div>
 </nav>
