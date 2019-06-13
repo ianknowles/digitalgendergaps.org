@@ -1,4 +1,4 @@
-let version = '0001'
+let version = '0003'
 let themeDirectory = '/wp-content/themes/digitalgendergaps'
 let imageDirectory = '/assets/images'
 let imagePath = themeDirectory + imageDirectory
