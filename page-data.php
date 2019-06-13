@@ -7,8 +7,8 @@
 		<?php get_sidebar(); ?>
 		<main role="main" class="col-12 col-md-10 ml-sm-auto px-0">
 			<div class="d-flex flex-column justify-content-between h-100 px-0">
-				<div class="px-4">
-					<div class="d-flex justify-content-between align-items-center flex-wrap pt-3 pb-2 mb-3 border-bottom">
+				<div class="p-4">
+					<div class="d-flex justify-content-between align-items-center flex-wrap pb-2 mb-3 border-bottom">
 						<div class="flex-column">
 							<div><h1 class="h2 my-0">Report</h1></div>
 							<div id="report"><h2 class="h3 my-0"></h2><span class="spinner-border"></span></div>

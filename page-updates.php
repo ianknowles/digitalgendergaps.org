@@ -7,10 +7,10 @@
 		<?php get_sidebar(); ?>
 		<main role="main" class="col-12 col-md-10 ml-sm-auto px-0">
 			<div class="d-flex flex-column justify-content-between h-100 px-0">
-				<div class="px-4">
+				<div class="p-4">
 					<?php $catquery = new WP_Query( 'cat=2&posts_per_page=5' ); ?>
 					<?php while($catquery->have_posts()) : $catquery->the_post(); ?>
-					<div class="card mt-4">
+					<div class="card my-4">
 						<div class="card-header"><h4><?php echo get_the_date(); ?></h4></div><div class="card-body"><h3 class="card-title"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h3>
 						<p class="card-text"><?php the_content(); ?></p></div>
 					</div>

@@ -6,7 +6,7 @@
 	<div class="row h-100">
 		<main role="main" class="col-12 col-md-12 ml-sm-auto px-0">
 			<div class="d-flex flex-column justify-content-between h-100 px-0">
-				<div class="px-4">
+				<div class="p-4">
 					<?php
 						if ( have_posts() ):
 							while ( have_posts() ):

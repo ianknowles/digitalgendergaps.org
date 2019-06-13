@@ -6,7 +6,7 @@
 	<div class="row h-100">
 		<main role="main" class="col-12 col-md-12 ml-sm-auto px-0">
 			<div class="d-flex flex-column justify-content-between h-100 px-0">
-				<div class="px-4">
+				<div class="p-4">
 					<h1 class="display-4 d-none d-md-block">
 						404
 					</h1>
