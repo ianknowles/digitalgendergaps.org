@@ -52,7 +52,7 @@
 </script>
 <script>
 	if (navigator.onLine === false) {
-		document.getElementById("offlineIndicator").class = 'navbar-text px-3 display-4';
+		document.getElementById("offlineIndicator").classList.remove('d-none');
 	} else if ('serviceWorker' in navigator) {
 	  window.addEventListener('load', function() {
 		navigator.serviceWorker.register('/sw.js').then(function(registration) {
