@@ -27,6 +27,6 @@
 				</div>
 			</li>
 		</ul>
-		<span id="offlineIndicator" class="navbar-text px-3 display-4 d-none">Offline</span>
+		<span id="offlineIndicator" class="navbar-text px-3 display-5 d-none">Offline Mode</span>
 	</div>
 </nav>
