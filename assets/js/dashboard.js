@@ -474,7 +474,10 @@ function createdatamap(id) {
             popupTemplate: function (geo, data) {
                 // don't show tooltip if country don't present in dataset
                 if ((!data) || (Object.keys(data).length === 0) || !('numberOfThings' in data) || isNaN(data.numberOfThings) || (data.numberOfThings === 0)) {
-                    return;
+                	return ['<div class="hoverinfo">',
+                   	 geo.properties.name, '<br />',
+                  	  'No data',,
+                  	  '</div>'].join('');
                 }
                 // tooltip content
                 return ['<div class="hoverinfo">',
