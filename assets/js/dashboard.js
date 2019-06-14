@@ -489,8 +489,10 @@ function createdatamap(id) {
         done: function(datamap) {
             datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
                 // alert(geography.properties.name);
-                window.location.href = "#" + geography.id;
-                anchorScroll(geography.id);
+                if (document.getElementById(geography.id)) {
+                	window.location.href = "#" + geography.id;
+                	anchorScroll(geography.id);
+                }
             });
         }
     });
