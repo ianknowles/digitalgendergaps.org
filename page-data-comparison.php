@@ -98,12 +98,5 @@
 }
 </script>
 <?php get_template_part('template-parts/footer/footer', 'keyscripts'); ?>
-<!-- Graphs -->
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="https://d3js.org/topojson.v1.min.js"></script>
-<script src="https://d3js.org/d3.geo.projection.v0.min.js"></script>
-<script src="https://d3js.org/d3-queue.v3.min.js"></script>
-<script src="https://datamaps.github.io/scripts/0.4.4/datamaps.world.min.js"></script>
-<script src="<?php echo plugins_url('digitalgendergaps/gendergaps.js', ''); ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<?php get_template_part('template-parts/footer/footer', 'graphscripts'); ?>
 <?php get_footer(); ?>
