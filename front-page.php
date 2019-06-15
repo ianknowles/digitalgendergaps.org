@@ -69,9 +69,13 @@
 					</div>
 				</div>
 				<div class="mt-4">
-					<?php get_footer(); ?>
+					<?php get_template_part('template-parts/footer/footer', 'authorship'); ?>
 				</div>
 			</div>
 		</main>
 	</div>
 </div>
+<?php
+	get_template_part('template-parts/footer/footer', 'keyscripts');
+	get_footer();
+?>

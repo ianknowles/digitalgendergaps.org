@@ -80,7 +80,7 @@
 					</div>
 				</div>
 				<div class="mt-2">
-					<?php get_footer(); ?>
+					<?php get_template_part('template-parts/footer/footer', 'authorship'); ?>
 				</div>
 			</div>
 		</main>
@@ -91,6 +91,7 @@
 	"report": "<?php echo filter_input(INPUT_GET, 'report'); ?>"
 }
 </script>
+<?php get_template_part('template-parts/footer/footer', 'keyscripts'); ?>
 <!-- Graphs -->
 <script
 	src="https://d3js.org/d3.v3.min.js"
@@ -123,3 +124,4 @@
 	integrity="sha384-U3SHMuMFK4M7q42jpyqaAHJTzci8BikdB2ZgmUEsrElciy0Ty1vxiW4EL3bNCsyT"
 	crossorigin="anonymous">
 </script>
+<?php get_footer(); ?>
