@@ -532,8 +532,9 @@ function addVLegend(layer, data, options) {
 	let steps = d3.range(11).map(d => d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100));
 	steps.sort(d3.descending)
 
-	var scale = d3.select('#v-legend-gradient')
-	scale.attr('style', 'width: 15px; height: 95%; background: linear-gradient(' + colour_max_value + ', ' + colour_min_value + ')');
+	d3.select('#v-legend-gradient')
+		.attr('style', 'width: 15px; height: 95%; background: linear-gradient('
+			+ colour_max_value + ', ' + colour_min_value + ')');
 
 	d3.select('#v-legend-values').selectAll('div')
 		.data(steps)
@@ -547,8 +548,9 @@ function addVLegend(layer, data, options) {
 function addHLegend(layer, data, options) {
 	let steps = d3.range(11).map(d => d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100));
 
-	var scale = d3.select('#h-legend-gradient')
-	scale.attr('style', 'width: 92.5%; height: 15px; background: linear-gradient(to right, ' + colour_min_value + ', ' + colour_max_value + ')');
+	d3.select('#h-legend-gradient')
+		.attr('style', 'width: 92.5%; height: 15px; background: linear-gradient(to right, '
+			+ colour_min_value + ', ' + colour_max_value + ')');
 
 	d3.select('#h-legend-values').selectAll('div')
 		.data(steps)
