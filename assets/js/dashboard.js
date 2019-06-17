@@ -192,7 +192,7 @@ function rowsort(d) {
 		columns.push(key)
 	}
 	data = dict
-	var table = d3.select('#modeltable');
+	var table = d3.select('#' + mapName + '-modeltable');
 	table.select('thead').remove();
 	table.select('tbody').remove();
 	var thead = table.append('thead')
@@ -314,7 +314,7 @@ function rowsort(d) {
 		//.attr('id', function (d) { if (d.column == 'ISO3Code') return d.value })
 
 	feather.replace()
-	d3.select('#tableshade').attr('class', 'd-none')
+	d3.select('#' + mapName + '-tableshade').attr('class', 'd-none')
 	outsideToHash()
 	return table;
 }
@@ -378,7 +378,7 @@ function ready(error, us) {
 }
 
 function addSearch() {
-    d3.select("#search")
+    d3.select('#' + mapName + '-search')
       .on("keyup", function() {
         var searched_data = csvdatalist,
             text = this.value.trim();
