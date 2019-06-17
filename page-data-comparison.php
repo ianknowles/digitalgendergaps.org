@@ -97,6 +97,8 @@
 	"report2": "<?php echo filter_input(INPUT_GET, 'report2'); ?>"
 }
 </script>
-<?php get_template_part('template-parts/footer/footer', 'keyscripts'); ?>
-<?php get_template_part('template-parts/footer/footer', 'graphscripts'); ?>
-<?php get_footer(); ?>
+<?php
+	get_template_part('template-parts/footer/footer', 'keyscripts');
+	get_template_part('template-parts/footer/footer', 'graphscripts');
+	get_footer();
+?>
