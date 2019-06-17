@@ -529,7 +529,7 @@ function addLegend(layer, data, options) {
 }
 
 function addHLegend(layer, data, options) {
-	var steps = d3.range(11).map(function(d) { return [d, d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100)]; });
+	var steps = d3.range(11).map(d => d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100));
 
 	var scale = d3.select('#h-legend-gradient')
 	scale.attr('style', 'width: 92.5%; height: 15px; background: linear-gradient(to right, ' + colour_min_value + ', ' + colour_max_value + ')');
@@ -539,7 +539,7 @@ function addHLegend(layer, data, options) {
 		.data(steps)
 		.text(function(x) {
 			if (x!="NaN") {
-				return x[1]
+				return x;
 			}
 		});
 }
@@ -573,7 +573,7 @@ function addColourPickers() {
 }
 
 function addVLegend(layer, data, options) {
-	var steps = d3.range(11).map(function(d) { return d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100); });
+	var steps = d3.range(11).map(d => d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100));
 	steps.sort(d3.descending)
 
 	var scale = d3.select('#v-legend-gradient')
