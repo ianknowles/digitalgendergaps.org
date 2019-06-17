@@ -13,6 +13,7 @@ var colour_max_value = "#00FF00"
 var minValue;
 var maxValue;
 var sortAscending = false;
+var mapName = 'map';
 
 /*function moveUnderNav() {
     var $el, h = window.location.hash;
@@ -66,7 +67,7 @@ $(window)
     //outsideToHash();
 //});
 
-map = createdatamap('myChart');
+map = createdatamap(mapName + '-chart-area');
 var l = {
     //legendTitle: "Where Have We Been",
     defaultFillName: "Whats left",
@@ -373,7 +374,7 @@ function ready(error, us) {
     }
 	d3.select('#sharemail').attr('href', "mailto:?to=&body=I'd%20like%20to%20share%20this%20Digital%20Gender%20Gaps%20report%20with%20you.%0A%0A" + window.location.href + "&subject=Digital%20Gender%20Gaps%20Report%20-%20" + report_title)
 	addSearch()
-	d3.select('#shade').attr('class', 'd-none')
+	d3.select('#' + mapName + '-shade').attr('class', 'd-none')
 }
 
 function addSearch() {
@@ -532,11 +533,11 @@ function addVLegend(layer, data, options) {
 	let steps = d3.range(11).map(d => d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100));
 	steps.sort(d3.descending)
 
-	d3.select('#v-legend-gradient')
+	d3.select('#' + mapName + '-v-legend-gradient')
 		.attr('style', 'width: 15px; height: 95%; background: linear-gradient('
 			+ colour_max_value + ', ' + colour_min_value + ')');
 
-	d3.select('#v-legend-values').selectAll('div')
+	d3.select('#' + mapName + '-v-legend-values').selectAll('div')
 		.data(steps)
 		.text(function(x) {
 			if (x!="NaN") {
@@ -548,11 +549,11 @@ function addVLegend(layer, data, options) {
 function addHLegend(layer, data, options) {
 	let steps = d3.range(11).map(d => d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100));
 
-	d3.select('#h-legend-gradient')
+	d3.select('#' + mapName + '-h-legend-gradient')
 		.attr('style', 'width: 92.5%; height: 15px; background: linear-gradient(to right, '
 			+ colour_min_value + ', ' + colour_max_value + ')');
 
-	d3.select('#h-legend-values').selectAll('div')
+	d3.select('#' + mapName + '-h-legend-values').selectAll('div')
 		.data(steps)
 		.text(function(x) {
 			if (x!="NaN") {
@@ -562,9 +563,9 @@ function addHLegend(layer, data, options) {
 }
 
 function addColourPickers() {
-	d3.select('#color-inequality').attr('value', colour_min_value).on('change', function() {colour_min_value = this.value; changeColumn1(); })
-	d3.select('#color-inequality-button').attr('style', 'background-color: ' + colour_min_value)
+	d3.select('#' + mapName + '-color-inequality').attr('value', colour_min_value).on('change', function() {colour_min_value = this.value; changeColumn1(); })
+	d3.select('#' + mapName + '-color-inequality-button').attr('style', 'background-color: ' + colour_min_value)
 
-	d3.select('#color-equality').attr('value', colour_max_value).on('change', function() {colour_max_value = this.value; changeColumn1(); })
-	d3.select('#color-equality-button').attr('style', 'background-color: ' + colour_max_value)
+	d3.select('#' + mapName + '-color-equality').attr('value', colour_max_value).on('change', function() {colour_max_value = this.value; changeColumn1(); })
+	d3.select('#' + mapName + '-color-equality-button').attr('style', 'background-color: ' + colour_max_value)
 }
