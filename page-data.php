@@ -50,13 +50,49 @@
 					<figure id="map-contain" class="position-relative">
 						<div id="shade" class="background-color-sea position-absolute w-100 h-100 d-flex justify-content-center align-items-center"><span class="spinner-border"></span></div>
 						<div class="row" >
-							<div id="map" class="col-12 col-lg-11 d-lg-flex flex-lg-column">
-								<div id="myChart" class="background-color-sea"></div>
+							<div id="map" class="col-12 col-lg-11 d-lg-flex flex-lg-column pr-lg-0">
+								<div id="myChart" class="border background-color-sea"></div>
 							</div>
-							<div id="map-v-legend" class="col-lg-1 d-none d-lg-flex flex-lg-column"></div>
+							<div id="map-v-legend" class="col-lg-1 d-none d-lg-flex flex-lg-column pl-0">
+								<div class="d-flex flex-row h-100">
+									<div id="v-legend-gradient" class="align-self-center mr-1" style="width: 15px; height: 95%; background: linear-gradient(#00FF00, #FF0000)"></div>
+									<div id="v-legend-values" class="d-flex flex-column justify-content-between">
+										<div class="font-weight-bold"></div>
+										<div></div>
+										<div></div>
+										<div></div>
+										<div></div>
+										<div></div>
+										<div></div>
+										<div></div>
+										<div></div>
+										<div></div>
+										<div class="font-weight-bold"></div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="row">
-							<div id="map-h-legend" class="col-12 col-lg-11"></div>
+						<div class="row d-flex d-lg-none">
+							<div id="map-h-legend" class="col-12 col-lg-11">
+								<div class="row d-flex justify-content-center align-items-center">
+									<div id="h-legend-gradient" style="width: 92.5%; height: 15px; background: linear-gradient(to right, #FF0000, #00FF00)"></div>
+								</div>
+								<div id="h-legend-values" class="d-flex flex-row justify-content-between">
+									<div class="font-weight-bold"></div>
+									<div class="d-none d-sm-block"></div>
+									<div></div>
+									<div class="d-none d-sm-block"></div>
+									<div></div>
+									<div class="d-none d-sm-block"></div>
+									<div></div>
+									<div class="d-none d-sm-block"></div>
+									<div></div>
+									<div class="d-none d-sm-block"></div>
+									<div class="font-weight-bold"></div>
+								</div>
+							</div>
+						</div>
+						<div id="palette-pickers" class="row mt-2">
 						</div>
 						<figcaption class="sr-only">Prediction map</figcaption>
 					</figure>

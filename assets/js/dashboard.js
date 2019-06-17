@@ -525,61 +525,28 @@ function addLegend(layer, data, options) {
 	}
 	addVLegend(layer, data, options);
 	addHLegend(layer, data, options);
+	addColourPickers();
 }
 
 function addHLegend(layer, data, options) {
-	d3.select( '#map-h-legend' ).selectAll('div').remove()
-	//d3.select( '#map-v-legend' ).selectAll('div').remove()
-	//d3.select( '#map' ).attr('class', 'col-12')
-	//d3.select( '#map-h-legend' ).attr('class', 'col-12 d-flex flex-column')
-	//d3.select( '#map-v-legend' ).attr('class', '')
 	var steps = d3.range(11).map(function(d) { return [d, d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100)]; });
 
-	var paletteScale = d3.scale.linear()
-       .domain([minValue, maxValue])
-       .range([colour_min_value, colour_max_value]);
+	var scale = d3.select('#h-legend-gradient')
+	scale.attr('style', 'width: 92.5%; height: 15px; background: linear-gradient(to right, ' + colour_min_value + ', ' + colour_max_value + ')');
 
-	var rows = d3.select( '#map-h-legend' )
-
-	//var top_label = rows.append('div')
-	//		.attr('class', 'row ')
-	//	.append('div')
-	//		.attr('class', 'col-12 p-0 font-weight-bold')
-	//		.text('Equality (1)')
-	//	.append('a')
-	//		.text('?')
-	//		.attr('class', 'badge badge-secondary')
-	//		.attr('style', 'vertical-align: super;')
-	//		.attr('href', '/indicators#scale')
-	var scale = rows.append('div').attr('class', 'row d-flex d-lg-none justify-content-center')//.append('div').attr('class', '').attr('style', 'width: 90.9091%')
-	//var bot_label = rows.append('div')
-	//		.attr('class', 'row ')
-	//	.append('div')
-	//		.attr('class', 'col-12 p-0 font-weight-bold')
-	//		.text('Inequality')
-	scale.append('div').attr('class', 'row m-0').attr('style', 'width: 90.9091%; height: 10px; background: linear-gradient(to right, ' + colour_min_value + ', ' + colour_max_value + ')');
-	var values = scale.append('div').attr('class', 'row w-100 m-0');
-
+	var values = d3.select('#h-legend-values')
 	values.selectAll('div')
 		.data(steps)
-		.enter()
-		//.append('div').attr('class', '').attr('style', 'width: 9.0909%')
-		.append('div')
-		.attr('class', function(x) {
-			if ((x[0] == 0) || (x[0] == 10)) {
-				return 'col px-1 px-sm-2 text-center my-auto font-weight-bold';
-			} else if ((x[0] % 2) == 1) {
-				return 'd-none d-sm-block col-sm px-sm-2 text-center my-auto';
-			} else {
-				return 'col px-1 px-sm-2 text-center my-auto';
-			}
-		})
 		.text(function(x) {
 			if (x!="NaN") {
 				return x[1]
 			}
 		});
-	var colorpick = rows.append('div').attr('class', 'row').append('div').attr('class', 'col-12 d-flex justify-content-between align-items-center flex-row')
+}
+
+function addColourPickers() {
+	var rows = d3.select('#palette-pickers')
+	var colorpick = rows.append('div').attr('class', 'col-12 d-flex justify-content-between align-items-center flex-row')
 	var inequalitypickgroup = colorpick.append('div').append('div').attr('class', 'input-group d-flex')
 		inequalitypickgroup.append('input').attr('type', 'color').attr('id', 'color-inequality').attr('value', colour_min_value).attr('class', 'align-self-stretch color-pick-size')
 		.on('change', function() {colour_min_value = this.value; changeColumn1(); })
@@ -603,103 +570,21 @@ function addHLegend(layer, data, options) {
 	equalitypickgroup.append('input').attr('type', 'color').attr('id', 'color-equality').attr('value', colour_max_value).attr('class', 'color-pick-size color-pick-right')
 		.on('change', function() {colour_max_value = this.value; changeColumn1(); })
 	equalitypickgroup.append('button').attr('class', 'btn btn-outline-secondary color-pick-size').attr('type', 'button').attr('style', 'background-color: ' + colour_max_value)
-
 }
 
 function addVLegend(layer, data, options) {
-	d3.select( '#map-v-legend' ).selectAll('div').remove()
-	//d3.select( '#map' ).attr('class', 'col-11')
-	//d3.select( '#map-h-legend' ).selectAll('div').remove()
-
-	//var steps = d3.range(minValue, maxValue, (maxValue - minValue) * 0.1)
 	var steps = d3.range(11).map(function(d) { return d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100); });
 	steps.sort(d3.descending)
-	var paletteScale = d3.scale.linear()
-       .domain([minValue, maxValue])
-       .range([colour_min_value, colour_max_value]);
 
-	var rows = d3.select( '#map-v-legend' )//.attr('class', 'col-1 d-flex flex-column')
-		//.append('div').attr('class', 'container h-100 p-0').append('div').attr('class', 'row h-100 equal');
-	//var top_label = rows.append('div')
-	//		.attr('class', 'row ')
-	//	.append('div')
-	//		.attr('class', 'col-12 p-0 font-weight-bold')
-	//		.text('Equality (1)')
-	//	.append('a')
-	//		.text('?')
-	//		.attr('class', 'badge badge-secondary')
-	//		.attr('style', 'vertical-align: super;')
-	//		.attr('href', '/indicators#scale')
-	var scale = rows.append('div').attr('class', 'row flex-grow-1')
-	//var bot_label = rows.append('div')
-	//		.attr('class', 'row ')
-	//	.append('div')
-	//		.attr('class', 'col-12 p-0 font-weight-bold')
-	//		.text('Inequality')
-	scale.append('div').attr('class', 'col-6 m-0 align-self-center').attr('style', 'height: 90.9091%; background: linear-gradient(' + colour_max_value + ', ' + colour_min_value + ')');
-	var values = scale.append('div').attr('class', 'col-6 h-auto m-0');
+	var scale = d3.select('#v-legend-gradient')
+	scale.attr('style', 'width: 15px; height: 95%; background: linear-gradient(' + colour_max_value + ', ' + colour_min_value + ')');
 
+	var values = d3.select('#v-legend-values')
 	values.selectAll('div')
 		.data(steps)
-		.enter()
-		.append('div').attr('class', 'row equal').attr('style', 'height: 9.0909%')
-		.append('div')
-		.attr('class', function(x) {
-			if ((x == d3.format(".2f")(minValue/100)) || (x == d3.format(".2f")(maxValue/100))) {
-				return 'col text-left pr-0 my-auto font-weight-bold';
-			} else {
-				return 'col text-left pr-0 my-auto';
-			}
-		})
 		.text(function(x) {
 			if (x!="NaN") {
-				return x
+				return x;
 			}
 		});
-}
-
-function addLegend2(layer, data, options) {
-	//var steps = d3.range(minValue, maxValue, (maxValue - minValue) * 0.1)
-	var steps = d3.range(11).map(function(d) { return d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100); });
-	var paletteScale = d3.scale.linear()
-       .domain([minValue, maxValue])
-       .range([colour_min_value, colour_max_value]);
-	d3.select( '#map-v-legend' ).selectAll('div').remove()
-	rows = d3.select( '#map-v-legend' )
-		//.append('div')
-		.append('div').attr('class', 'container h-100 p-0').append('div').attr('class', 'row h-100 equal')
-		//.attr('class', 'datamaps-legend')
-		//.attr('class', 'w-100 h-100 p-3')
-		//.html(html);
-		.selectAll('div')
-        .data(steps)
-        .enter()
-        .append('div').attr('class', 'col-12').append('div').attr('class', 'row h-100 equal');
-
-	columns = d3.range(2)
-     rows.selectAll('div')
-             .data(function(row) {
-                 return columns.map(function (column) {
-                     return { column: column, value: row }
-                 })
-             })
-     .enter()
-     .append('div').attr('style', function(x) {
-     	if (x.column ==0) {
-     		return 'background: ' + paletteScale(x.value * 100)
-     	}
-     }).attr('class', function(x) {
-        if (x.column ==0) {
-     	return 'col-6 h-100 m-0'
-     	}
-     	else
-     	{
-     	return 'col-6 text-center my-auto font-weight-bold'
-     	}
-     })
-     .text(function(x) {
-     	if ((x.column==1) && (x.value!="NaN")) {
-     	return x.value
-     	}
-     });
 }
