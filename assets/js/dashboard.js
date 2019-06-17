@@ -528,6 +528,23 @@ function addLegend(layer, data, options) {
 	addColourPickers();
 }
 
+function addVLegend(layer, data, options) {
+	var steps = d3.range(11).map(d => d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100));
+	steps.sort(d3.descending)
+
+	var scale = d3.select('#v-legend-gradient')
+	scale.attr('style', 'width: 15px; height: 95%; background: linear-gradient(' + colour_max_value + ', ' + colour_min_value + ')');
+
+	var values = d3.select('#v-legend-values')
+	values.selectAll('div')
+		.data(steps)
+		.text(function(x) {
+			if (x!="NaN") {
+				return x;
+			}
+		});
+}
+
 function addHLegend(layer, data, options) {
 	var steps = d3.range(11).map(d => d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100));
 
@@ -570,21 +587,4 @@ function addColourPickers() {
 	equalitypickgroup.append('input').attr('type', 'color').attr('id', 'color-equality').attr('value', colour_max_value).attr('class', 'color-pick-size color-pick-right')
 		.on('change', function() {colour_max_value = this.value; changeColumn1(); })
 	equalitypickgroup.append('button').attr('class', 'btn btn-outline-secondary color-pick-size').attr('type', 'button').attr('style', 'background-color: ' + colour_max_value)
-}
-
-function addVLegend(layer, data, options) {
-	var steps = d3.range(11).map(d => d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100));
-	steps.sort(d3.descending)
-
-	var scale = d3.select('#v-legend-gradient')
-	scale.attr('style', 'width: 15px; height: 95%; background: linear-gradient(' + colour_max_value + ', ' + colour_min_value + ')');
-
-	var values = d3.select('#v-legend-values')
-	values.selectAll('div')
-		.data(steps)
-		.text(function(x) {
-			if (x!="NaN") {
-				return x;
-			}
-		});
 }
