@@ -562,29 +562,9 @@ function addHLegend(layer, data, options) {
 }
 
 function addColourPickers() {
-	var rows = d3.select('#palette-pickers')
-	var colorpick = rows.append('div').attr('class', 'col-12 d-flex justify-content-between align-items-center flex-row')
-	var inequalitypickgroup = colorpick.append('div').append('div').attr('class', 'input-group d-flex')
-		inequalitypickgroup.append('input').attr('type', 'color').attr('id', 'color-inequality').attr('value', colour_min_value).attr('class', 'align-self-stretch color-pick-size')
-		.on('change', function() {colour_min_value = this.value; changeColumn1(); })
-	inequalitypickgroup.append('button').attr('class', 'btn btn-outline-secondary color-pick-size').attr('type', 'button').attr('style', 'background-color: ' + colour_min_value)
-	inequalitypickgroup.append('div').attr('class', 'input-group-append').append('span').attr('class', 'input-group-text')
-		.append('a')
-			.text('Inequality')
-			.attr('href', '/indicators#scale')
-		//.append('span')
-    		//.text('?')
-    		//.attr('class', 'badge badge-secondary p-1')
-    		//.attr('style', 'vertical-align: super;')
+	d3.select('#color-inequality').attr('value', colour_min_value).on('change', function() {colour_min_value = this.value; changeColumn1(); })
+	d3.select('#color-inequality-button').attr('style', 'background-color: ' + colour_min_value)
 
-
-	var equalitypickgroup = colorpick.append('div').append('div').attr('class', 'input-group')
-
-	equalitypickgroup.append('div').attr('class', 'input-group-prepend').append('span').attr('class', 'input-group-text')
-		.append('a')
-			.text('Equality')
-			.attr('href', '/indicators#scale')
-	equalitypickgroup.append('input').attr('type', 'color').attr('id', 'color-equality').attr('value', colour_max_value).attr('class', 'color-pick-size color-pick-right')
-		.on('change', function() {colour_max_value = this.value; changeColumn1(); })
-	equalitypickgroup.append('button').attr('class', 'btn btn-outline-secondary color-pick-size').attr('type', 'button').attr('style', 'background-color: ' + colour_max_value)
+	d3.select('#color-equality').attr('value', colour_max_value).on('change', function() {colour_max_value = this.value; changeColumn1(); })
+	d3.select('#color-equality-button').attr('style', 'background-color: ' + colour_max_value)
 }
