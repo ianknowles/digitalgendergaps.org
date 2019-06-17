@@ -535,8 +535,7 @@ function addVLegend(layer, data, options) {
 	var scale = d3.select('#v-legend-gradient')
 	scale.attr('style', 'width: 15px; height: 95%; background: linear-gradient(' + colour_max_value + ', ' + colour_min_value + ')');
 
-	var values = d3.select('#v-legend-values')
-	values.selectAll('div')
+	d3.select('#v-legend-values').selectAll('div')
 		.data(steps)
 		.text(function(x) {
 			if (x!="NaN") {
@@ -551,8 +550,7 @@ function addHLegend(layer, data, options) {
 	var scale = d3.select('#h-legend-gradient')
 	scale.attr('style', 'width: 92.5%; height: 15px; background: linear-gradient(to right, ' + colour_min_value + ', ' + colour_max_value + ')');
 
-	var values = d3.select('#h-legend-values')
-	values.selectAll('div')
+	d3.select('#h-legend-values').selectAll('div')
 		.data(steps)
 		.text(function(x) {
 			if (x!="NaN") {
