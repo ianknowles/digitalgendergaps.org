@@ -1,9 +1,9 @@
-					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-end pt-3 pb-2 mb-3 border-bottom">
-						<h2 class="h3">Details</h2>
-						<div class="btn-toolbar mb-2 mb-md-0">
-							<div class="input-group my-2 my-lg-0">
+					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-end mt-3 pb-2 mb-3 border-bottom">
+						<h2 class="h3 my-0">Details</h2>
+						<div class="btn-toolbar mt-2 mb-0">
+							<div class="input-group">
 								<div class="input-group-prepend">
-									<div class="input-group-text" id=""><span data-feather='filter'></span></div>
+									<div class="input-group-text"><span data-feather='filter'></span></div>
 								</div>
 								<input id="<?php echo get_query_var('map-template-id'); ?>-search" class="form-control mr-sm-2" type="text" placeholder="Filter by Country" aria-label="Filter">
 							</div>
