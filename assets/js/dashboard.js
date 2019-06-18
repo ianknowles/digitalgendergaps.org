@@ -317,11 +317,13 @@ function ready(error, us) {
     }
     d3.select('#' + mapName + '-report-label').select('h2').text(report_title);
     d3.select('#' + mapName + '-report-label').select('span').attr('class', 'd-none');
-    d3.select('#' + mapName + '-csvlink').attr('href', csv_url);
+    d3.select('#' + mapName + '-csvlink').on("click", function() {location.href=csv_url;});
     if (!window.location.search) {
 		history.replaceState(null, '', '?report=' + report_title);
     }
-	d3.select('#' + mapName + '-sharemail').attr('href', "mailto:?to=&body=I'd%20like%20to%20share%20this%20Digital%20Gender%20Gaps%20report%20with%20you.%0A%0A" + window.location.href + "&subject=Digital%20Gender%20Gaps%20Report%20-%20" + report_title)
+	d3.select('#' + mapName + '-sharemail').on('click', function() {
+		window.open("mailto:?to=&body=I'd%20like%20to%20share%20this%20Digital%20Gender%20Gaps%20report%20with%20you.%0A%0A" + window.location.href + "&subject=Digital%20Gender%20Gaps%20Report%20-%20" + report_title, '_blank');
+	})
 	addSearch()
 	d3.select('#' + mapName + '-shade').attr('class', 'd-none')
 }
