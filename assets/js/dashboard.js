@@ -35,37 +35,39 @@ d3.select(window).on('resize', function() {
     map.resize();
 });
 
-d3.json("https://s3.eu-west-3.amazonaws.com/www.digitalgendergaps.org/data/models.json", function(model_index){
-	d3.select('#reportpicker').selectAll('option').remove()
-	d3.select('#reportpicker')
-    	.selectAll('option')
-    	.data(Object.keys(model_index))
-    	.enter()
-    	.append('option')
-    	.text(function(x){return x;})
-    	.attr('value', function(x){return model_index[x];});
-    d3.select('#reportpicker').select('option').attr('value', model_index['latest'])
-    d3.select('#reportpicker').select('option').text('Latest')
-    //var formData = new FormData(document.querySelector('form'))
-    var formDict = JSON.parse(document.getElementById('formdata').innerHTML);
-    //for(var pair of formData.entries()) {
+d3.json(base_url + "data/models.json", function(model_index) {
+	let picker = d3.select('#' + mapName + '-report-picker')
+	picker.selectAll('option').remove()
+	picker
+		.selectAll('option')
+		.data(Object.keys(model_index))
+		.enter()
+		.append('option')
+		.text(function(x){return x;})
+		.attr('value', function(x){return model_index[x];});
+	picker.select('option').attr('value', model_index['latest'])
+	picker.select('option').text('Latest')
+	//var formData = new FormData(document.querySelector('form'))
+	var formDict = JSON.parse(document.getElementById('chart-setup').innerHTML);
+	//for(var pair of formData.entries()) {
 	//	formDict[pair[0]] = pair[1]
-    //}
-    if (('report' in formDict) && (formDict['report'] in model_index))
-    {
-		d3.select('#reportpicker').property('value', model_index[formDict['report']])
+	//}
+	if (('report' in formDict) && (formDict['report'] in model_index))
+	{
+		picker.property('value', model_index[formDict['report']])
 		csv_url = base_url + model_index[formDict['report']];
-    } else {
-		d3.select('#reportpicker').property('value', model_index['latest'])
+	} else {
+		picker.property('value', model_index['latest'])
 		csv_url = base_url + model_index['latest'];
     }
 
 	fetch_csv();
+
+	picker.on('change', change_report)
 })
 
 function change_report() {
-    var report = document.getElementById("reportpicker").value;
-	csv_url = base_url + report;
+	csv_url = base_url + this.value;
 
 	dataset = [{}, {}];
     csvdata = {};
@@ -280,8 +282,8 @@ function ready(error, us) {
             headers.push(key);
         }
     }
-    var selCol1 = document.getElementById('selCol1');
-    d3.select('#selCol1').selectAll('option').remove()
+    var selCol1 = document.getElementById(mapName + '-select-column');
+    d3.select('#'+ mapName + '-select-column').selectAll('option').remove()
 
     for (var x in headers) {
 		var header_dict5 = {
@@ -300,29 +302,35 @@ function ready(error, us) {
         selCol1.options.add(new Option(header_dict5[headers[x]], headers[x]));
     }
     selCol1.value = headers[1];
+    d3.select('#'+ mapName + '-select-column').on('change', changeColumn)
 
     //tabulate(csvdatalist);
     //map.mylegend(l);
-    updateMap(map, 'myChart', dataset[0], selCol1.value);
+    updateMap(map, mapName + '-chart-area', dataset[0], selCol1.value);
     //map.mylegend(l);
     //map.resize()
     tabulate(csvdatalist);
     //map.resize()
     //TODO get the datestring cleanly
-    var picker = document.getElementById("reportpicker")
+    var picker = document.getElementById(mapName + "-report-picker")
     var report_title = picker.options[picker.selectedIndex].text
     if (report_title == 'Latest') {
 		report_title = picker.value.split('/')[1]
     }
-    d3.select('#report').select('h2').text(report_title);
-    d3.select('#report').select('span').attr('class', 'd-none');
-    d3.select('#csvlink').attr('href', csv_url);
+    d3.select('#' + mapName + '-report-label').select('h2').text(report_title);
+    d3.select('#' + mapName + '-report-label').select('span').attr('class', 'd-none');
+    d3.select('#' + mapName + '-csvlink').attr('href', csv_url);
     if (!window.location.search) {
 		history.replaceState(null, '', '?report=' + report_title);
     }
-	d3.select('#sharemail').attr('href', "mailto:?to=&body=I'd%20like%20to%20share%20this%20Digital%20Gender%20Gaps%20report%20with%20you.%0A%0A" + window.location.href + "&subject=Digital%20Gender%20Gaps%20Report%20-%20" + report_title)
+	d3.select('#' + mapName + '-sharemail').attr('href', "mailto:?to=&body=I'd%20like%20to%20share%20this%20Digital%20Gender%20Gaps%20report%20with%20you.%0A%0A" + window.location.href + "&subject=Digital%20Gender%20Gaps%20Report%20-%20" + report_title)
 	addSearch()
 	d3.select('#' + mapName + '-shade').attr('class', 'd-none')
+}
+
+function changeColumn() {
+    dataset[0] = {}
+    updateMap(map, mapName + '-chart-area', dataset[0], this.value);
 }
 
 function addSearch() {
@@ -352,13 +360,6 @@ function addSearch() {
 
 		tabulate(searched_data)
 		})
-}
-
-function changeColumn1() {
-    var selCol = document.getElementById("selCol1");
-    var column = selCol.value;
-    dataset[0] = {}
-    updateMap(map, 'myChart', dataset[0], column);
 }
 
 function updateMap(map, id, dataset, column) {
@@ -445,26 +446,6 @@ function createdatamap(id) {
             });
         }
     });
-}
-
-function csvshare() {
-    /* Get the text field */
-    var copyText = document.getElementById("csvlink").getAttribute("href");
-
-	if (navigator) {
-		navigator.clipboard.writeText(copyText).then(function() {
-			console.log('Async: Copying to clipboard was successful');
-		}, function(err) {
-			console.error('Async: Could not copy text: ', err);
-		});
-		/* Alert the copied text */
-		//TODO toast don't alert
-		alert("csv data link has been copied to your clipboard: " + copyText);
-    }
-    else
-    {
-    	alert("Can't copy link to your clipboard, please share manually" + copyText);
-    }
 }
 
 function addLegend(layer, data, options) {
