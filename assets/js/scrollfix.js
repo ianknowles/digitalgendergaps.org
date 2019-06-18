@@ -20,6 +20,9 @@ function scrollToWindowHash() {
 }
 
 $(window)
+    .on("load", function () {
+        scrollToWindowHash();
+    })
     .on('hashchange', function () {
         scrollToWindowHash();
     });
