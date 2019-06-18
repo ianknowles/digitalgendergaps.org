@@ -563,9 +563,11 @@ function addHLegend(layer, data, options) {
 }
 
 function addColourPickers() {
-	d3.select('#' + mapName + '-color-inequality').attr('value', colour_min_value).on('change', function() {colour_min_value = this.value; changeColumn1(); })
-	d3.select('#' + mapName + '-color-inequality-button').attr('style', 'background-color: ' + colour_min_value)
+	d3.select('#' + mapName + '-color-min-input').attr('value', colour_min_value).on('change', function() {colour_min_value = this.value; changeColumn1(); })
+	d3.select('#' + mapName + '-color-min-button').attr('style', 'background-color: ' + colour_min_value)
+	d3.select('#' + mapName + '-color-min-link').attr('href', '/indicators#scale').text('Inequality')
 
-	d3.select('#' + mapName + '-color-equality').attr('value', colour_max_value).on('change', function() {colour_max_value = this.value; changeColumn1(); })
-	d3.select('#' + mapName + '-color-equality-button').attr('style', 'background-color: ' + colour_max_value)
+	d3.select('#' + mapName + '-color-max-input').attr('value', colour_max_value).on('change', function() {colour_max_value = this.value; changeColumn1(); })
+	d3.select('#' + mapName + '-color-max-button').attr('style', 'background-color: ' + colour_max_value)
+	d3.select('#' + mapName + '-color-max-link').attr('href', '/indicators#scale').text('Equality')
 }
