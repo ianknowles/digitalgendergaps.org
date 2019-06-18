@@ -32,7 +32,7 @@ var legendopts = {element: "map-legend"}
 map.addPlugin("mylegend", addLegend);
 
 d3.select(window).on('resize', function() {
-    map.resize();
+	map.resize();
 });
 
 d3.json(base_url + "data/models.json", function(model_index) {
@@ -59,7 +59,7 @@ d3.json(base_url + "data/models.json", function(model_index) {
 	} else {
 		picker.property('value', model_index['latest'])
 		csv_url = base_url + model_index['latest'];
-    }
+	}
 
 	fetch_csv();
 
@@ -70,11 +70,11 @@ function change_report() {
 	csv_url = base_url + this.value;
 
 	dataset = [{}, {}];
-    csvdata = {};
-    csvdatalist = [];
-    map.updateChoropleth({}, {reset: true})
+	csvdata = {};
+	csvdatalist = [];
+	map.updateChoropleth({}, {reset: true})
 
-    fetch_csv();
+	fetch_csv();
 }
 
 function fetch_csv() {
@@ -85,8 +85,6 @@ function fetch_csv() {
         })
         .await(ready);
 }
-
-
 
 var tabulate = function (dict) {
 function rowsort(d) {
