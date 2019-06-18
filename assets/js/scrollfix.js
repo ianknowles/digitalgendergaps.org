@@ -4,9 +4,11 @@ function anchorScroll(fragment) {
     let amount, ttarget;
     amount = $('#nav-header').height();
     ttarget = $('#' + fragment);
-    //$('html,body').animate({ scrollTop: ttarget.offset().top - amount }, 250);
-    //$(ttarget).animate({ scrollTop: ttarget.offset().top - amount }, 250);
-    $('html,body').scrollTop(ttarget.offset().top - amount);
+    if (ttarget.offset()) {
+        //$('html,body').animate({ scrollTop: ttarget.offset().top - amount }, 250);
+        //$(ttarget).animate({ scrollTop: ttarget.offset().top - amount }, 250);
+        $('html,body').scrollTop(ttarget.offset().top - amount);
+    }
     return false;
 }
 
