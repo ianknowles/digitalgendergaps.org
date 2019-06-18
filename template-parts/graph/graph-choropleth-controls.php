@@ -3,7 +3,7 @@
 							<div><h1 class="h2 my-0">Report</h1></div>
 							<div id="<?php echo get_query_var('map-template-id'); ?>-report-label"><h2 class="h3 my-0"></h2><span class="spinner-border"></span></div>
 						</div>
-						<div class="btn-toolbar mb-2 mb-md-0 flex-column flex-md-row">
+						<div class="btn-toolbar mt-2 mb-0 flex-column flex-lg-row">
 							<div class="input-group m-1">
 								<div class="input-group-prepend">
 									<label for="<?php echo get_query_var('map-template-id'); ?>-report-picker" class="input-group-text">
