@@ -274,3 +274,7 @@ div.map-shade, div#tableshade {
 figure.map-contain {
 	min-height: 39vw;
 }
+
+.border-right-2 {
+	border-right-width: 2px;
+}
