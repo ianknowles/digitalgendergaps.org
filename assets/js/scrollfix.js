@@ -10,9 +10,9 @@ function anchorScroll(fragment) {
     return false;
 }
 
-function outsideToHash() {
+function scrollToWindowHash() {
     "use strict";
-    var fragment;
+    let fragment;
     if (window.location.hash) {
         fragment = window.location.hash.substring(1);
         anchorScroll(fragment);
@@ -21,5 +21,5 @@ function outsideToHash() {
 
 $(window)
     .on('hashchange', function () {
-        outsideToHash();
+        scrollToWindowHash();
     });

@@ -263,7 +263,7 @@ function rowsort(d) {
 
 	feather.replace()
 	d3.select('#' + mapName + '-tableshade').attr('class', 'd-none')
-	outsideToHash()
+	scrollToWindowHash()
 	return table;
 }
 
