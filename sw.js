@@ -10,11 +10,11 @@ let appCaches = [{
     urls: [
       '/',
       '/data/',
-      // /updates need to cache posts first
+      '/updates/',
       '/project/',
-      //'./indicators/',
+      '/indicators/',
       '/team/',
-      //'./offline/',
+      '/offline/',
       themeDirectory + '/style.css',
       cssPath + '/dashboard.css',
       jsPath + '/dashboard.js',
