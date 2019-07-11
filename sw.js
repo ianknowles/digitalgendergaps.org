@@ -134,7 +134,7 @@ self.addEventListener('fetch', function(event) {
 
 self.addEventListener('activate', function(event) {
 
-  let cacheWhitelist = ['pages-cache-' + version, 'images-cache-' + version, 'third-party-js-cache-' + version, 'data-cache-' + version];
+  let cacheWhitelist = appCaches.map(cache => cache.name);
 
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
