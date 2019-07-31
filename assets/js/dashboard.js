@@ -1,38 +1,198 @@
-// Datamaps expect data in format:
-// { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
-//   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
-var dataset = [{}, {}];
 var csvdata = {};
 var csvdatalist = [];
-var map;
 var csv_url = "";
+
 var datestring = ""
 var base_url = "https://s3.eu-west-3.amazonaws.com/www.digitalgendergaps.org/";
-var colour_min_value = "#FF0000"
-var colour_max_value = "#00FF00"
-var minValue;
-var maxValue;
+
 var sortAscending = false;
 var mapName = 'map';
 
-map = createdatamap(mapName + '-chart-area');
-var l = {
-    //legendTitle: "Where Have We Been",
-    defaultFillName: "Whats left",
-    //labels: {
-    //    Visited: "Fred",
-    //    spouse: "Wilma",
-    //    together: "Together",
-    //    separately: "Separately",
-    //},
-};
-var legendopts = {element: "map-legend"}
-//map.legend(l, legendopts);
-//add the plugin to Datamaps
-map.addPlugin("mylegend", addLegend);
+function createdatamap(id) {
+    return new Datamap({
+        element: document.getElementById(id),
+        projection: 'equirectangular',
+        responsive: true,
+        //aspectRatio: 0.6785714285714286,
+        //aspectRatio: 0.5625,
+        aspectRatio: 0.5,
+        // countries not listed in dataset will be painted with this color
+        fills: {defaultFill: '#F5F5F5'},
+        data: {},
+        geographyConfig: {
+            borderColor: '#DEDEDE',
+            highlightBorderWidth: 2,
+            // don't change color on mouse hover
+            highlightFillColor: function (geo) {
+                return geo['fillColor'] || '#F5F5F5';
+            },
+            // only change border
+            highlightBorderColor: '#B7B7B7',
+            // show desired information in tooltip
+            popupTemplate: function (geo, data) {
+                // don't show tooltip if country don't present in dataset
+                if ((!data) || (Object.keys(data).length === 0) || !('numberOfThings' in data) || isNaN(data.numberOfThings) || (data.numberOfThings === 0)) {
+                	return ['<div class="hoverinfo">',
+                   	 geo.properties.name, '<br />',
+                  	  'No data',,
+                  	  '</div>'].join('');
+                }
+                // tooltip content
+                return ['<div class="hoverinfo">',
+                    '<strong>', geo.properties.name, '</strong>',
+                    '<br>', '<strong>', (data.numberOfThings / 100).toFixed(3), '</strong>',
+                    '</div>'].join('');
+            }
+        },
+        done: function(datamap) {
+            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+                // alert(geography.properties.name);
+                if (document.getElementById(geography.id)) {
+                	window.location.href = "#" + geography.id;
+                	anchorScroll(geography.id);
+                }
+            });
+        }
+    });
+}
+
+class DggMap {
+	constructor(id_prefix) {
+		this.id_prefix = id_prefix;
+		this.datamap = createdatamap(this.id_prefix + '-chart-area');
+		this.dataset = {};
+		this.color_min_value = "#FF0000";
+        this.color_max_value = "#00FF00";
+	}
+
+	clear() {
+		this.dataset = {};
+		this.map.updateChoropleth({}, {reset: true});
+	}
+
+	//TODO rewrite so that this expects key value pairs, trim the csv data to a single column elsewhere
+	setData(column) {
+		this.dataset = {};
+
+		for (let key in csvdata) {
+			let item = {};
+			item['numberOfThings'] = csvdata[key][column] * 100;
+			if (!isNaN(item['numberOfThings'])) {
+				this.dataset[key] = item;
+			}
+		}
+    }
+
+	get minValue() {
+		let range = Object.keys(this.dataset).map(key => this.dataset[key]['numberOfThings']);
+		return Math.min.apply(null, range);
+	}
+
+	get maxValue() {
+		let range = Object.keys(this.dataset).map(key => this.dataset[key]['numberOfThings']);
+		return Math.max.apply(null, range);
+	}
+
+	get colour_min_value() {
+		return this.color_min_value;
+	}
+
+	set colour_min_value(color) {
+		this.color_min_value = color;
+		this.updateColors();
+    }
+
+	get colour_max_value() {
+		return this.color_max_value;
+	}
+
+    set colour_max_value(color) {
+    	this.color_max_value = color;
+		this.updateColors();
+    }
+
+	updateColors() {
+		if (Object.keys(this.dataset).length === 0) {
+			return;
+		}
+	//TODO save palettescale and recompute when colour min/max are changed via setters
+		let paletteScale = d3.scale.linear()
+			.domain([this.minValue, this.maxValue])
+			.range([this.colour_min_value, this.colour_max_value]);
+
+		// Datamaps expects data in format:
+        // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
+        //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
+		for (let key in this.dataset) {
+			if (isNaN(this.dataset[key]['numberOfThings']) || (this.dataset[key]['numberOfThings'] === 0)) {
+				//get defaultFill from map
+				this.dataset[key]['fillColor'] = this.map.options.fills.defaultFill;
+			}
+			else {
+				this.dataset[key]['fillColor'] = paletteScale(this.dataset[key]['numberOfThings']);
+			}
+		}
+
+		this.datamap.updateChoropleth(this.dataset, {reset: true});
+		this.addLegend();
+	}
+
+	addLegend() {
+		this.addVLegend();
+		this.addHLegend();
+		this.addColourPickers();
+	}
+
+	addVLegend() {
+		let steps = d3.range(11).map(d => d3.format(".2f")((this.minValue + ((this.maxValue - this.minValue) * 0.1 * d))/100));
+		steps.sort(d3.descending)
+
+		d3.select('#' + this.id_prefix + '-v-legend-gradient')
+			.attr('style', 'width: 15px; height: 95%; background: linear-gradient('
+				+ this.colour_max_value + ', ' + this.colour_min_value + ')');
+
+		d3.select('#' + this.id_prefix + '-v-legend-values').selectAll('div')
+			.data(steps)
+			.text(function(x) {
+				if (x != "NaN") {
+					return x;
+				}
+			});
+	}
+
+	addHLegend() {
+		let steps = d3.range(11).map(d => d3.format(".2f")((this.minValue + ((this.maxValue - this.minValue) * 0.1 * d))/100));
+
+		d3.select('#' + this.id_prefix + '-h-legend-gradient')
+			.attr('style', 'width: 92.5%; height: 15px; background: linear-gradient(to right, '
+				+ this.colour_min_value + ', ' + this.colour_max_value + ')');
+
+		d3.select('#' + this.id_prefix + '-h-legend-values').selectAll('div')
+			.data(steps)
+			.text(function(x) {
+				if (x != "NaN") {
+					return x;
+				}
+			});
+	}
+
+	addColourPickers() {
+		//TODO do we have a better option than declaring self to get at the object in the callback context?
+		let self = this;
+		d3.select('#' + this.id_prefix + '-color-min-input').attr('value', this.colour_min_value).on('change', function() {self.colour_min_value = this.value;})
+		d3.select('#' + this.id_prefix + '-color-min-button').attr('style', 'background-color: ' + this.colour_min_value)
+		d3.select('#' + this.id_prefix + '-color-min-link').attr('href', '/indicators#scale').text('Inequality')
+
+		d3.select('#' + this.id_prefix + '-color-max-input').attr('value', this.colour_max_value).on('change', function() {self.colour_max_value = this.value;})
+		d3.select('#' + this.id_prefix + '-color-max-button').attr('style', 'background-color: ' + this.colour_max_value)
+		d3.select('#' + this.id_prefix + '-color-max-link').attr('href', '/indicators#scale').text('Equality')
+	}
+}
+
+var dggmap = new DggMap(mapName);
 
 d3.select(window).on('resize', function() {
-	map.resize();
+	dggmap.datamap.resize();
 });
 
 d3.json(base_url + "data/models.json", function(model_index) {
@@ -69,10 +229,9 @@ d3.json(base_url + "data/models.json", function(model_index) {
 function change_report() {
 	csv_url = base_url + this.value;
 
-	dataset = [{}, {}];
 	csvdata = {};
 	csvdatalist = [];
-	map.updateChoropleth({}, {reset: true})
+	dggmap.clear()
 
 	fetch_csv();
 }
@@ -305,13 +464,10 @@ function ready(error, us) {
     selCol1.value = headers[1];
     d3.select('#'+ mapName + '-select-column').on('change', changeColumn)
 
-    //tabulate(csvdatalist);
-    //map.mylegend(l);
-    updateMap(map, mapName + '-chart-area', dataset[0], selCol1.value);
-    //map.mylegend(l);
-    //map.resize()
+    dggmap.setData(selCol1.value);
+    dggmap.updateColors();
     tabulate(csvdatalist);
-    //map.resize()
+
     //TODO get the datestring cleanly
     var picker = document.getElementById(mapName + "-report-picker")
     var report_title = picker.options[picker.selectedIndex].text
@@ -332,8 +488,8 @@ function ready(error, us) {
 }
 
 function changeColumn() {
-    dataset[0] = {}
-    updateMap(map, mapName + '-chart-area', dataset[0], this.value);
+    dggmap.setData(this.value);
+    dggmap.updateColors();
 }
 
 function addSearch() {
@@ -363,143 +519,4 @@ function addSearch() {
 
 		tabulate(searched_data)
 		})
-}
-
-function updateMap(map, id, dataset, column) {
-    var onlyValues = [];
-
-	//TODO dataset should not be passed in here need to ensure its empty so best to start over
-	dataset = {}
-    for (var key in csvdata) {
-        var item = {};
-        item['numberOfThings'] = csvdata[key][column] * 100;
-        if (!isNaN(item['numberOfThings'])) {
-            onlyValues.push(item['numberOfThings']);
-            dataset[key] = item;
-        }
-    }
-    minValue = Math.min.apply(null, onlyValues);
-    //minValue = Math.min.apply(null, [50, minValue]);
-    maxValue = Math.max.apply(null, onlyValues);
-    //maxValue = Math.max.apply(null, [100, maxValue]);
-
-    var paletteScale = d3.scale.linear()
-        .domain([minValue, maxValue])
-        .range([colour_min_value, colour_max_value]);
-
-    // fill dataset in appropriate format
-    for (var key in dataset) {
-        if (isNaN(dataset[key]['numberOfThings']) || (dataset[key]['numberOfThings'] === 0)) {
-            //get defaultFill from map
-            dataset[key]['fillColor'] = map.options.fills.defaultFill;
-        }
-        else {
-            dataset[key]['fillColor'] = paletteScale(dataset[key]['numberOfThings']);
-        }
-    }
-
-    map.updateChoropleth(dataset, {reset: true});
-    map.mylegend();
-}
-
-function createdatamap(id) {
-    return new Datamap({
-        element: document.getElementById(id),
-        projection: 'equirectangular', // big world map
-        //projection: 'mercator',
-        responsive: true,
-        //aspectRatio: 0.6785714285714286,
-        //aspectRatio: 0.5625,
-        aspectRatio: 0.5,
-        // countries don't listed in dataset will be painted with this color
-        fills: {defaultFill: '#F5F5F5'},
-        data: {},
-        geographyConfig: {
-            borderColor: '#DEDEDE',
-            highlightBorderWidth: 2,
-            // don't change color on mouse hover
-            highlightFillColor: function (geo) {
-                return geo['fillColor'] || '#F5F5F5';
-            },
-            // only change border
-            highlightBorderColor: '#B7B7B7',
-            // show desired information in tooltip
-            popupTemplate: function (geo, data) {
-                // don't show tooltip if country don't present in dataset
-                if ((!data) || (Object.keys(data).length === 0) || !('numberOfThings' in data) || isNaN(data.numberOfThings) || (data.numberOfThings === 0)) {
-                	return ['<div class="hoverinfo">',
-                   	 geo.properties.name, '<br />',
-                  	  'No data',,
-                  	  '</div>'].join('');
-                }
-                // tooltip content
-                return ['<div class="hoverinfo">',
-                    '<strong>', geo.properties.name, '</strong>',
-                    '<br>', '<strong>', (data.numberOfThings / 100).toFixed(3), '</strong>',
-                    '</div>'].join('');
-            }
-        },
-        done: function(datamap) {
-            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-                // alert(geography.properties.name);
-                if (document.getElementById(geography.id)) {
-                	window.location.href = "#" + geography.id;
-                	anchorScroll(geography.id);
-                }
-            });
-        }
-    });
-}
-
-function addLegend(layer, data, options) {
-	data = data || {};
-	if ( !this.options.fills ) {
-		return;
-	}
-	addVLegend(layer, data, options);
-	addHLegend(layer, data, options);
-	addColourPickers();
-}
-
-function addVLegend(layer, data, options) {
-	let steps = d3.range(11).map(d => d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100));
-	steps.sort(d3.descending)
-
-	d3.select('#' + mapName + '-v-legend-gradient')
-		.attr('style', 'width: 15px; height: 95%; background: linear-gradient('
-			+ colour_max_value + ', ' + colour_min_value + ')');
-
-	d3.select('#' + mapName + '-v-legend-values').selectAll('div')
-		.data(steps)
-		.text(function(x) {
-			if (x!="NaN") {
-				return x;
-			}
-		});
-}
-
-function addHLegend(layer, data, options) {
-	let steps = d3.range(11).map(d => d3.format(".2f")((minValue + ((maxValue - minValue) * 0.1 * d))/100));
-
-	d3.select('#' + mapName + '-h-legend-gradient')
-		.attr('style', 'width: 92.5%; height: 15px; background: linear-gradient(to right, '
-			+ colour_min_value + ', ' + colour_max_value + ')');
-
-	d3.select('#' + mapName + '-h-legend-values').selectAll('div')
-		.data(steps)
-		.text(function(x) {
-			if (x!="NaN") {
-				return x;
-			}
-		});
-}
-
-function addColourPickers() {
-	d3.select('#' + mapName + '-color-min-input').attr('value', colour_min_value).on('change', function() {colour_min_value = this.value; changeColumn1(); })
-	d3.select('#' + mapName + '-color-min-button').attr('style', 'background-color: ' + colour_min_value)
-	d3.select('#' + mapName + '-color-min-link').attr('href', '/indicators#scale').text('Inequality')
-
-	d3.select('#' + mapName + '-color-max-input').attr('value', colour_max_value).on('change', function() {colour_max_value = this.value; changeColumn1(); })
-	d3.select('#' + mapName + '-color-max-button').attr('style', 'background-color: ' + colour_max_value)
-	d3.select('#' + mapName + '-color-max-link').attr('href', '/indicators#scale').text('Equality')
 }
