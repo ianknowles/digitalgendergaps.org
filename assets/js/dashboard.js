@@ -9,6 +9,8 @@ var sortAscending = false;
 var mapName = 'map';
 
 function createdatamap(id) {
+	//TODO using a local var but should be able to access this.fills.defaultFill when its needed
+	let defaultFill = '#F5F5F5';
     return new Datamap({
         element: document.getElementById(id),
         projection: 'equirectangular',
@@ -17,14 +19,17 @@ function createdatamap(id) {
         //aspectRatio: 0.5625,
         aspectRatio: 0.5,
         // countries not listed in dataset will be painted with this color
-        fills: {defaultFill: '#F5F5F5'},
+        fills: {defaultFill: defaultFill},
         data: {},
         geographyConfig: {
             borderColor: '#DEDEDE',
             highlightBorderWidth: 2,
             // don't change color on mouse hover
             highlightFillColor: function (geo) {
-                return geo['fillColor'] || '#F5F5F5';
+            	if ((!geo) || (Object.keys(geo).length === 0) || !('numberOfThings' in geo) || isNaN(geo.numberOfThings) || (geo.numberOfThings === 0)) {
+            		return defaultFill;
+            	}
+                return geo['fillColor'] || defaultFill;
             },
             // only change border
             highlightBorderColor: '#B7B7B7',
@@ -67,6 +72,7 @@ class DggMap {
 
 	clear() {
 		this.dataset = {};
+		this.datamap.options.data = {};
 		this.map.updateChoropleth({}, {reset: true});
 	}
 
@@ -133,6 +139,7 @@ class DggMap {
 			}
 		}
 
+		this.datamap.options.data = {};
 		this.datamap.updateChoropleth(this.dataset, {reset: true});
 		this.addLegend();
 	}
