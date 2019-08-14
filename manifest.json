@@ -1,9 +1,9 @@
 {
-  "short_name": "DGG",
-  "name": "Digital Gender Gaps",
+  "short_name": "NHS Dash",
+  "name": "NHS Dash",
   "icons": [
 	{
-	  "src": "/wp-content/themes/digitalgendergaps/assets/images/oxweb-logo-rect.svg",
+	  "src": "/wp-content/themes/nhsdash/assets/images/oxweb-logo-rect.svg",
 	  "type": "image/svg",
 	  "sizes": "192x192 512x512"
 	}
