@@ -19,7 +19,8 @@
 	<title><?php wp_title(' | ', true, 'right'); ?><?php echo get_bloginfo('name', 'display'); ?></title>
 
 	<!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="<?php echo get_theme_file_uri('/assets/css/vendor/bootstrap.min.css'); ?>" rel="stylesheet">
+	<link href="<?php echo get_theme_file_uri('/assets/css/vendor/c3.min.css'); ?>" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
 	<link href="<?php echo get_theme_file_uri('/assets/css/dashboard.css'); ?>" rel="stylesheet">
