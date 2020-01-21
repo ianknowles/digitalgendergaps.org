@@ -14,7 +14,7 @@
 				<a class="nav-link pl-1" href="<?php echo get_bloginfo('wpurl', 'display'); ?>"><span data-feather="home"></span><span class="ml-1">Home</span></a>
 			</li>
 			<li class="nav-item<?php if (get_post_field( 'post_name', get_post() ) == 'data'): echo ' active'; endif; ?>">
-				<a class="nav-link pl-1" href="<?php echo get_permalink(get_page_by_path('data', OBJECT, 'page')); ?>"><span data-feather="database"></span><span class="ml-1">Data</span><span class="sr-only"><?php if (get_post_field( 'post_name', get_post() ) == 'data'): echo '(current)'; endif; ?></span></a>
+				<a class="nav-link pl-1" href="<?php echo get_permalink(get_page_by_path('dashboard', OBJECT, 'page')); ?>"><span data-feather="database"></span><span class="ml-1">Data</span><span class="sr-only"><?php if (get_post_field( 'post_name', get_post() ) == 'data'): echo '(current)'; endif; ?></span></a>
 			</li>
 			<li class="nav-item dropdown<?php $page = get_post_field( 'post_name', get_post() ); if (($page == 'project') || ($page == 'indicators') || ($page == 'team') || ($page == 'privacy-policy')): echo ' active'; endif; ?>">
 				<a class="nav-link pl-1 dropdown-toggle" href="." id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span data-feather="info"></span><span class="ml-1">About</span></a>
