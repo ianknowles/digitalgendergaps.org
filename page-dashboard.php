@@ -5,7 +5,7 @@
 <div class="container-fluid position-absolute top-0 h-100">
 	<div class="row h-100">
 		<?php get_sidebar(); ?>
-		<main role="main" class="col-12 col-md-10 ml-sm-auto px-0">
+		<main role="main" class="col-12 col-md-10 ml-sm-auto px-0 bg-dark">
 			<div class="d-flex flex-column justify-content-between h-100 px-0">
 				<div class="p-4">
 					<div class="row">

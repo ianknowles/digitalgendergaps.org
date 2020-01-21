@@ -10,5 +10,5 @@
 							get_template_part('template-parts/graph/graph', 'legend-h');
 							//get_template_part('template-parts/graph/graph', 'palettepicker');
 						?>
-						<figcaption id="<?php echo get_query_var('map-template-id'); ?>-chart-caption"></figcaption>
+						<figcaption id="<?php echo get_query_var('map-template-id'); ?>-chart-caption" class="text-light"></figcaption>
 					</figure>

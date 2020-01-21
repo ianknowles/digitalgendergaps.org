@@ -1,5 +1,5 @@
-<footer class="bg-light w-100 h-100">
-	<hr class="mt-0">
+<footer class="bg-dark w-100 h-100">
+	<hr class="mt-0 bg-light">
 	<div class="d-flex flex-column flex-lg-row flex-wrap justify-content-center align-content-center">
 		<div class="align-self-center">
 			<a href="https://www.sociology.ox.ac.uk/" target="_blank" rel="noopener">
@@ -8,5 +8,5 @@
 			</a>
 		</div>
 	</div>
-	<p class="m-2">&copy; 2019–<?=date("Y")?>, NHS Funding Project</p>
+	<p class="p-2 mb-0 text-light">&copy; 2019–<?=date("Y")?>, NHS Funding Project</p>
 </footer>

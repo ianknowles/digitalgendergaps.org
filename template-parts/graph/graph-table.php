@@ -11,5 +11,5 @@
 					</div>
 					<div class="table-responsive position-relative" style="min-height: 40px;">
 						<div id="<?php echo get_query_var('map-template-id'); ?>-table-shade" class="position-absolute w-100 h-100 d-flex justify-content-center"><span class="spinner-border"></span></div>
-						<table id="<?php echo get_query_var('map-template-id'); ?>-table" class="table table-striped table-hover"></table>
+						<table id="<?php echo get_query_var('map-template-id'); ?>-table" class="table table-striped table-dark table-hover"></table>
 					</div>
