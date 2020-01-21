@@ -93,12 +93,28 @@ function remove_json_api () {
 
     // Remove oEmbed-specific JavaScript from the front-end and back-end.
     remove_action( 'wp_head', 'wp_oembed_add_host_js' );
+	add_filter( 'tiny_mce_plugins', 'disable_embeds_tiny_mce_plugin' );
 
-   // Remove all embeds rewrite rules.
-   add_filter( 'rewrite_rules_array', 'disable_embeds_rewrites' );
+	// Remove all embeds rewrite rules.
+	add_filter( 'rewrite_rules_array', 'disable_embeds_rewrites' );
 
+	// Remove filter of the oEmbed result before any HTTP requests are made.
+	remove_filter( 'pre_oembed_result', 'wp_filter_pre_oembed_result', 10 );
 }
-add_action( 'after_setup_theme', 'remove_json_api' );
+add_action( 'init', 'remove_json_api', 9999 );
+
+function disable_embeds_tiny_mce_plugin($plugins) {
+    return array_diff($plugins, array('wpembed'));
+}
+
+function disable_embeds_rewrites($rules) {
+    foreach($rules as $rule => $rewrite) {
+        if(false !== strpos($rewrite, 'embed=true')) {
+            unset($rules[$rule]);
+        }
+    }
+    return $rules;
+}
 
 function disable_json_api () {
 
